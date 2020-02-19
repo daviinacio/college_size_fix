@@ -1,18 +1,3 @@
-chrome.runtime.onMessage.addListener((request, sender, sendResponse) => {
-    if(request.size){
-        changeSize(request.size);
-        localStorage.setItem('EstacioFlashSize.size', request.size);
-    }
-    else
-    if(request.question){
-        alert(request.question);
-        switch(request.question){
-            case 'isEstacio':
-                sendResponse(frame != null);
-                break;
-        }
-    }
-});
 
 const ratio = 1.691;
 
@@ -24,6 +9,21 @@ const sizes = {
         height: 842
     }
 };
+
+chrome.runtime.onMessage.addListener((request, sender, sendResponse) => {
+    if(request.size){
+        changeSize(request.size);
+        localStorage.setItem('EstacioFlashSize.size', request.size);
+    }
+    else
+    if(request.request){
+        switch(request.request){
+            case 'options':
+                sendResponse(Object.keys(sizes));
+                break;
+        }
+    }
+});
 
 var frame = document.querySelector('#courseIframe');
 
