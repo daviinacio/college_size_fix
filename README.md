@@ -1,5 +1,5 @@
 # Estacio Flash Size
-Uma forma simples e rápida de ajustar o tamanho do conteúdo em flash da Estácio, e facilitar a leitura do mesmo.
+An easy and quick way to adjust the size of Estácio's Flash content, and make it easier to read.
 
 ## Issue to solve
 The Flash Content from Estácio is too small, and do not adapt on large displays.
