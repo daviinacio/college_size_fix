@@ -19,7 +19,10 @@ chrome.runtime.onMessage.addListener((request, sender, sendResponse) => {
     if(request.request){
         switch(request.request){
             case 'options':
-                sendResponse(Object.keys(sizes));
+                sendResponse(
+                    window.loaded === true ? 
+                        Object.keys(sizes) :
+                        undefined);
                 break;
         }
     }
@@ -33,6 +36,8 @@ var frame = document.querySelector('#courseIframe');
             var currentSize = localStorage.getItem('EstacioFlashSize.size');
 
             changeSize(currentSize ? currentSize : 'Normal');
+
+            window.loaded = true;
         });
     }
 })(document);
@@ -58,57 +63,3 @@ function changeSize(size){
         }
     }
 }
-
-
-/*EstacioFlashSize = {};
-
-
-
-
-alert();
-
-
-EstacioFlashSize.setSize = function(currentSize){
-    const frame = document.querySelector('#courseIframe').contentDocument;
-
-    if(frame){
-        const flash = frame.querySelector('#centro > object');
-        const container = frame.querySelector('#centro');
-        const body = frame.querySelector('body');
-
-        const size = sizes[currentSize];
-
-        if(size){
-            alert('Current size: ' + size.height);
-            flash.style.width = (size.height * ratio)+'px';
-            flash.style.height = size.height+'px';   
-            
-            container.style.width = 'inherit';
-            container.style.backgroundImage = 'none';
-            
-            body.style.backgroundImage = 'none';
-        }
-    }
-}*/
-
-
-/*function frameSize(){
-    const width = 1500;
-    
-    var frame = document.querySelector('#courseIframe').contentDocument;
-    var flash = frame.querySelector('#centro > object');
-    var container = frame.querySelector('#centro');
-    var body = frame.querySelector('body');
-    
-    flash.style.width = width+'px';
-    flash.style.height = (width / 1.6)+'px';   
-    
-    container.style.width = 'inherit';
-    container.style.backgroundImage = 'none';
-    
-    body.style.backgroundImage = 'none';
-}; 
-
-frameSize();
-
-*/
