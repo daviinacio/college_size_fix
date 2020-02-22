@@ -7,14 +7,10 @@ Isso dificulta a leitura, e ficar a uma distância saldável da tela.
 
 Então.. Aqui está a solução! :)
 
-## Instalação (Enquando não estiver no Chrome Web Store)
-1. Baixe [a branch master](https://github.com/daviinacio/estacio_flash_size/archive/master.zip) do repositório
-2. Extraia o arquivo em uma pasta
-3. Vá para a [página de extensões do Chrome](chrome://extensions)
-4. Ative o 'Modo de Desenvolvedor'
-5. Clique em 'Carregar sem compactação'
-6. Selecione a pasta descompactada
-
+## Instalação
+1. Vá até a [Chrome Web Store](https://chrome.google.com/webstore/detail/est%C3%A1cio-flash-size-beta/kjokipgpljcoidilmaahgdejibepoakn)
+2. Clique em 'Usar no chrome'
+3. Já está instalado!!
 
 ## Como usar
 Clique no icone da extensão e escolha um tamanho.

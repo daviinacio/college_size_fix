@@ -7,20 +7,18 @@
     "content_scripts": [
         {
             "matches": [
-	    	"http://estacio.webaula.com.br/*",
+                "http://estacio.webaula.com.br/*",
                 "https://estacio.webaula.com.br/*"
-	    ],
+        ],
             "js": ["content.js"]
         }
     ],
     "browser_action": {
         "default_popup": "popup.html",
-        "default_title": "Selecione o tamanho"
+        "default_title": "Click para mudar o tamanho do conteúdo"
     },
     "permissions": [
-	"activeTab",
-	"http://estacio.webaula.com.br/*",
-	"https://estacio.webaula.com.br/*"
+        "activeTab"
     ],
     "icons": {
         "16": "icon.png",

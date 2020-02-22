@@ -7,14 +7,10 @@ It's difficult to read and stay at a healthy distance from the screen.
 
 So.. Here's the solution! :)
 
-## Instalation (While it isn't on Chrome Web Store)
-1. Download [the master branch](https://github.com/daviinacio/estacio_flash_size/archive/master.zip) from github.
-2. UnZip the file on a folder
-3. Goto [Chrome Extensions Page](chrome://extensions)
-4. Active developer options
-5. Click on 'Load Unpacked'
-6. Select the Unzip folder
-
+## Instalation 
+1. Goto [Chrome Web Store](https://chrome.google.com/webstore/detail/est%C3%A1cio-flash-size-beta/kjokipgpljcoidilmaahgdejibepoakn)
+2. Click on 'Use on chrome'
+3. Has already been installed!!
 
 ## Getting Started
 Click on Extension icon and choose a size.
