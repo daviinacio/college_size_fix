@@ -4,55 +4,93 @@
     <meta charset='utf-8'>
     <meta http-equiv='X-UA-Compatible' content='IE=edge'>
     <title>Document</title>
+    <!-- Add icon library -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    
     <style>
-        body {
+        * {
+            padding: 0;
             margin: 0;
-            padding: 2.5px;
-            background: transparent;
-            width: 250px;
-            text-align: center;
+            border: 0;
         }
-
-        body > * {
-            width: calc(100% - 5px);
-            margin: 2.5px;
+        
+        *:focus {
+            outline: none;
         }
-
-        button {
-            color: #1d1d1d;
-            font-weight: 600;
+    
+        html, body {
+            min-width: 300px;
+        }
+        
+        header {
+            background: rgb(15,176,93);
+            background: linear-gradient(55deg, rgba(15,176,93,1) 5%, rgba(3,170,209,1) 95%);
+            color: white;
+            height: 75px;
+            display: flex;
+            align-items: center;
             padding: 10px;
-            text-align: center;
-            border: none;
-            border: 1px solid #777;
+        }
+        
+        #icon {
+            width: 50px;
+            margin-right: 10px;
+        }
+        
+        #buttons {
+            padding: 0.5px;
+            display: none;
+        }
+        
+        button {
+            font-weight: 200;
+            font-size: 18px;
+            width: calc(100% - 1px);
+            padding: 7.5px 20px;
+            margin: 0.5px;
             cursor: pointer;
-            border-radius: 5px;
-
-            transition: box-shadow 0.4s;
+            border-radius: 2px;
+            background-color: #eee;
+            color: rgb(75, 75, 75);
         }
-
+        
         button:hover {
-            box-shadow: 
-                inset 0 0 0 100vh rgba(0, 0, 0, 0.2);
+            background-color: #ddd;
         }
-
-        span{
-            width: 250px;
-            font-size: 14px;
-            font-weight: 800;
-            color: red;
+        
+        button > i {
+            left: 25px;
+            position: fixed;
+            opacity: 0;
+            color: #0c9396;
         }
-
-        a {
-            color: lightseagreen;
-            padding: 5px 0;
+        
+        button.active > i {
+            opacity: 1;
+        }
+        
+        #error {
+            padding: 10px;
         }
     </style>
     <script src="popup.js"></script>
+    <script src="utils.js"></script>
 </head>
 <body>
-    <span class="error">Conteúdo flash não encontrado!<br />
-        <a href="mailto:suporte@daviapps.com">Deixe seu feedback</a>
-    </span>
+    <header>
+        <img id="icon" res="icons" />
+        <div class="right">
+            <h1 id="title"><span res="name"></span></h1>
+            <h6 id="version">Version <span res="version"></span></h6>
+        </div>
+    </header>
+    
+    <section id="buttons"></section>
+    
+    <section id="error">
+        <span class="error">Conteúdo flash não encontrado!<br />
+            <a href="https://chrome.google.com/webstore/detail/kjokipgpljcoidilmaahgdejibepoakn" target="_blank">Deixe seu feedback</a>
+        </span>
+    </section>
 </body>
 </html>

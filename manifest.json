@@ -1,5 +1,5 @@
 {
-    "name": "Estácio Flash Size (beta)",
+    "name": "Estácio Flash Size",
     "version": "1.0",
     "manifest_version": 2,
     "author": "daviinacio",
@@ -9,7 +9,7 @@
             "matches": [
                 "http://estacio.webaula.com.br/*",
                 "https://estacio.webaula.com.br/*"
-        ],
+            ],
             "js": ["content.js"]
         }
     ],
