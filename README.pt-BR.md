@@ -8,7 +8,7 @@ Isso dificulta a leitura, e ficar a uma distância saldável da tela.
 Então.. Aqui está a solução! :)
 
 ## Instalação
-1. Vá até a [Chrome Web Store](https://chrome.google.com/webstore/detail/est%C3%A1cio-flash-size-beta/kjokipgpljcoidilmaahgdejibepoakn)
+1. Vá para a [Chrome Web Store](https://chrome.google.com/webstore/detail/kjokipgpljcoidilmaahgdejibepoakn)
 2. Clique em 'Usar no chrome'
 3. Já está instalado!!
 

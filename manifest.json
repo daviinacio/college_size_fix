@@ -1,6 +1,6 @@
 {
-    "name": "Estácio Flash Size (beta)",
-    "version": "1.0",
+    "name": "Estácio Flash Size",
+    "version": "1.1",
     "manifest_version": 2,
     "author": "daviinacio",
     "description": "Uma forma simples e rápida de ajustar o tamanho do conteúdo em flash da Estácio, e facilitar a leitura do mesmo.",
@@ -9,13 +9,13 @@
             "matches": [
                 "http://estacio.webaula.com.br/*",
                 "https://estacio.webaula.com.br/*"
-        ],
+            ],
             "js": ["content.js"]
         }
     ],
     "browser_action": {
         "default_popup": "popup.html",
-        "default_title": "Click para mudar o tamanho do conteúdo"
+        "default_title": "Clique para mudar o tamanho do conteúdo"
     },
     "permissions": [
         "activeTab"

@@ -11,20 +11,16 @@ const sizes = {
 };
 
 chrome.runtime.onMessage.addListener((request, sender, sendResponse) => {
-    if(request.size){
-        changeSize(request.size);
-        localStorage.setItem('EstacioFlashSize.size', request.size);
+    if(request.choose){
+        changeSize(request.choose);
+        localStorage.setItem('EstacioFlashSize.size', request.choose);
     }
     else
-    if(request.request){
-        switch(request.request){
-            case 'options':
-                sendResponse(
-                    window.loaded === true ? 
-                        Object.keys(sizes) :
-                        undefined);
-                break;
-        }
+    if(request.options){
+        sendResponse({
+            options: window.loaded === true ? Object.keys(sizes) : undefined,
+            active: localStorage.getItem('EstacioFlashSize.size')
+        });
     }
 });
 
