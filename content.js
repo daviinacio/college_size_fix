@@ -60,16 +60,19 @@ function CollegeFlashSize(){
 
                 const elements = {};
 
-                Object.keys(college.elements).forEach((key) => {
-                    const el = document.querySelectorAll(college.elements[key]);
-
-                    if(el){
-                        elements[key] = el.length > 1 ? el : el[0];
-                    }
-                });
+                if(college.elements){
+                    Object.keys(college.elements).forEach((key) => {
+                        const el = document.querySelectorAll(college.elements[key]);
+    
+                        if(el){
+                            elements[key] = el.length > 1 ? el : el[0];
+                        }
+                    });
+                }
 
 
                 /*            FREME ELEMENTS            */
+
                 const frameElements = {};
 
                 if(college.frame){
@@ -83,6 +86,7 @@ function CollegeFlashSize(){
                         }
                     });
                 }
+
 
                 /*              DIMENTIONS              */
 
@@ -104,6 +108,8 @@ function CollegeFlashSize(){
                 else
                 if(size.height)
                     size.width = size.height;
+                else
+                    throw "CollegeFlashSize::Error -> invalid option dimentions";
 
                 // Handle change
                 if(college.change){
@@ -140,14 +146,11 @@ changer.addCollege({
             ratio: 1.691
         }
     },
-    elements: {
-        
-    },
     frame: "#courseIframe",
     frameElements: {
         'flash': "#centro > object",
         'container': "#centro",
-        'body': 'body'
+        'body': "body"
     },
     change: function(e){
         const { frameElements, size } = e;
@@ -155,14 +158,14 @@ changer.addCollege({
         const { body, flash, container } = frameElements;
         const { width, height } = size;
 
-        flash.style.width = width+'px';
-        flash.style.height = height+'px';
-        flash.style.margin = 'auto';   
-        
+        flash.style.width = width + 'px';
+        flash.style.height = height + 'px';
+        flash.style.margin = 'auto';
+
         container.style.width = 'inherit';
         container.style.backgroundImage = 'none';
         container.style.display = 'flex';
-        
+
         body.style.backgroundImage = 'none';
     }
 });

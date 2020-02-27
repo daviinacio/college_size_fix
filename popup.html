@@ -24,14 +24,21 @@
         }
         
         header {
-
-background: rgb(196,167,17);
-background: linear-gradient(90deg, rgba(196,167,17,1) 0%, rgba(7,176,245,1) 100%);
+            background: rgb(154, 170, 13);
+            background: linear-gradient(115deg, rgb(154, 170, 13) 0%, rgb(16, 194, 120, 1) 40%, rgba(7,176,245,1) 100%);
             color: white;
             height: 75px;
             display: flex;
             align-items: center;
             padding: 10px;
+        }
+
+        a {
+            color: rgb(0, 118, 165);
+        }
+
+        a:hover {
+            color: rgba(7,176,245,1)
         }
         
         #icon {
@@ -83,7 +90,7 @@ background: linear-gradient(90deg, rgba(196,167,17,1) 0%, rgba(7,176,245,1) 100%
         <img id="icon" res="icons" draggable="false"  />
         <div class="right">
             <h1 id="title"><span res="name"></span></h1>
-            <h6 id="version">Version <span res="version"></span></h6>
+            <h5 id="version">Version <span res="version"></span></h5>
         </div>
     </header>
     
