@@ -14,6 +14,11 @@ document.addEventListener('DOMContentLoaded', function () {
             }
         });
     });
+
+    // Prevent contextmenu
+    document.addEventListener('contextmenu', function(event) {
+        event.preventDefault();
+     }, true); 
     
     chrome.tabs.query({
         currentWindow: true,
