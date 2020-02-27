@@ -1,40 +1,6 @@
 function CollegeFlashSize(){
     const colleges = [];
 
-    function init(){
-        colleges.forEach((college) => {
-            // Initialize on frame load
-            const frame = document.querySelector(college.frame);
-
-            if(college.frame && frame){
-                frame.addEventListener('load', initialize);
-            }
-            // Initialize if the string matches
-            else {
-                for(let i = 0; i < college.matches.length; i++) {
-                    if(location.hostname.includes(college.matches[i])){
-                        initialize();
-                        break;
-                    }
-                }
-            }
-            
-            function initialize(){
-                college.active = true;
-
-                var currentSize = localStorage.getItem('CollegeFlashSize.size');
-
-                choose(
-                    // Preference value
-                    currentSize ? currentSize :
-
-                    // First option from college
-                    Object.keys(college.options)[0]
-                );
-            }
-        });
-    };
-
     chrome.runtime.onMessage.addListener((request, sender, sendResponse) => {
         if(request.choose){
             choose(request.choose);
@@ -55,6 +21,36 @@ function CollegeFlashSize(){
 
     function addCollege(college){
         colleges.push(college);
+
+        // Initialize on frame load
+        if(college.frame){
+            const frame = document.querySelector(college.frame);
+            if(frame)
+                frame.addEventListener('load', initialize);
+        }
+        // Initialize if the string matches
+        else {
+            for(let i = 0; i < college.matches.length; i++) {
+                if(location.hostname.includes(college.matches[i])){
+                    initialize();
+                    break;
+                }
+            }
+        }
+        
+        function initialize(){
+            college.active = true;
+
+            var currentSize = localStorage.getItem('CollegeFlashSize.size');
+
+            choose(
+                // Preference value
+                currentSize ? currentSize :
+
+                // First option from college
+                Object.keys(college.options)[0]
+            );
+        }
     }
 
     function choose(choice){
@@ -110,16 +106,18 @@ function CollegeFlashSize(){
                     size.width = size.height;
 
                 // Handle change
-                if(college.change)
-                    college.change(elements, frameElements, size);
+                if(college.change){
+                    college.change({
+                        elements, frameElements, size
+                    });
+                }
             }
         });
     }
 
     return {
         addCollege,
-        choose,
-        init
+        choose
     };
 };
 
@@ -151,9 +149,11 @@ changer.addCollege({
         'container': "#centro",
         'body': 'body'
     },
-    change: function(elements, frameElements, dimens){
+    change: function(e){
+        const { frameElements, size } = e;
+
         const { body, flash, container } = frameElements;
-        const { width, height } = dimens;
+        const { width, height } = size;
 
         flash.style.width = width+'px';
         flash.style.height = height+'px';
@@ -167,5 +167,32 @@ changer.addCollege({
     }
 });
 
-// Initialize and wait for frame load (if exists)
-changer.init();
+// Add new college content size fix here :)
+changer.addCollege({
+    name: "college",
+    matches: [
+        // String that matches with hostname
+        // Place any string here if there doesn't have iframe
+    ],
+    options: {
+        'Size_Label': {
+            // Dimens
+        }
+    },
+    elements: {
+        // Elements from document
+    },
+    frame: "",  // Content iframe id
+    frameElements: {
+        // Elements from frame
+    },
+    change: function(e){
+        const { elements, frameElements, size } = e;
+
+        const { } = elements;
+        const { } = frameElements;
+        const { } = size;
+
+        // Place element modifications here
+    }
+});
