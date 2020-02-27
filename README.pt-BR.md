@@ -1,3 +1,5 @@
+<img src="icon.png" align="left" />
+
 # College Size Fix
 Uma ferramenta que permite mudar facilmente o tamanho do coteúdo de sistemas EAD e, facilizar a leitura.
 

@@ -1,3 +1,5 @@
+<img src="icon.png" align="left" />
+
 # College Size fix
 This is a tool that allows you to easily change the content size of your distance learning system, and make it easier to read.
 
@@ -27,7 +29,7 @@ Your preference will be saved to be used on future.
 5. Send a pull-request
 6. I will test and merge your changes
 
-## Use this template
+### Use this template
 Use on script [content.js](https://github.com/daviinacio/estacio_flash_size/blob/develop/content.js)
 
 ```javascript
