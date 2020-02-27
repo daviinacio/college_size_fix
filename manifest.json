@@ -1,14 +1,14 @@
 {
-    "name": "Estácio Flash Size",
+    "name": "College Size Fix",
     "version": "1.2",
     "manifest_version": 2,
     "author": "daviinacio",
-    "description": "Uma forma simples e rápida de ajustar o tamanho do conteúdo em flash da Estácio, e facilitar a leitura do mesmo.",
+    "description": "Uma ferramenta que permite mudar facilmente o tamanho do coteúdo flash de sistemas EAD e, facilizar a leitura.",
     "content_scripts": [
         {
             "matches": [
-                "http://estacio.webaula.com.br/*",
-                "https://estacio.webaula.com.br/*"
+                "http://*.webaula.com.br/*",
+                "https://*.webaula.com.br/*"
             ],
             "js": ["content.js"]
         }
