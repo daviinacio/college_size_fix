@@ -5,7 +5,7 @@ document.addEventListener('DOMContentLoaded', function () {
             
             if(element){
                 const value = typeof(manifest[key]) == 'object' ? (
-                            Object.values(manifest[key])[0]) : manifest[key];
+                                Object.values(manifest[key])[0]) : manifest[key];
             
                 if(element.nodeName == 'IMG')
                     element.src = value;
@@ -14,6 +14,11 @@ document.addEventListener('DOMContentLoaded', function () {
             }
         });
     });
+
+    // Prevent contextmenu
+    document.addEventListener('contextmenu', function(event) {
+        event.preventDefault();
+     }, true); 
     
     chrome.tabs.query({
         currentWindow: true,

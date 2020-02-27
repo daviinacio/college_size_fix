@@ -12,6 +12,7 @@
             padding: 0;
             margin: 0;
             border: 0;
+            user-select: none;
         }
         
         *:focus {
@@ -23,8 +24,9 @@
         }
         
         header {
-            background: rgb(15,176,93);
-            background: linear-gradient(55deg, rgba(15,176,93,1) 5%, rgba(3,170,209,1) 95%);
+
+background: rgb(196,167,17);
+background: linear-gradient(90deg, rgba(196,167,17,1) 0%, rgba(7,176,245,1) 100%);
             color: white;
             height: 75px;
             display: flex;
@@ -78,7 +80,7 @@
 </head>
 <body>
     <header>
-        <img id="icon" res="icons" />
+        <img id="icon" res="icons" draggable="false"  />
         <div class="right">
             <h1 id="title"><span res="name"></span></h1>
             <h6 id="version">Version <span res="version"></span></h6>
