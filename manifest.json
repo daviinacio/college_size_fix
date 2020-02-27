@@ -10,7 +10,10 @@
                 "http://*.webaula.com.br/*",
                 "https://*.webaula.com.br/*"
             ],
-            "js": ["content.js"]
+            "js": [
+                "modules.js",
+                "content.js"
+            ]
         }
     ],
     "browser_action": {
