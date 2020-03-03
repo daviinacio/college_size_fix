@@ -1,56 +1,55 @@
 <img src="icon.png" align="left" />
 
-# College Size fix
-This is a tool that allows you to easily change the content size of your distance learning system, and make it easier to read.
+# College Size Fix
+Uma ferramenta que permite mudar facilmente o tamanho do coteúdo de sistemas EAD e, facilizar a leitura.
 
-## Issue to solve
-Some distance learning systems provides their content with flash player. And too many times, the content doesn't fit properly on screen.
-It's difficult to read and stay at a healthy distance from the screen.
+## Problema a ser solucionado
+Algumas faculdades ainda disponibilizam seus conteúdos em flash. Muitas vezes, esses conteúdos não se adaptão corretamente aos monitores, dificultando significativamente a leitura, e provoca cansaço nos olhos..
 
-So.. Here's the solution! :)
+Então.. Aqui está a solução! :)
 
-## Instalation 
-1. Goto [Chrome Web Store](https://chrome.google.com/webstore/detail/kjokipgpljcoidilmaahgdejibepoakn)
-2. Click on 'Use on chrome'
-3. Has already been installed!!
+## Instalação
+1. Vá para a [Chrome Web Store](https://chrome.google.com/webstore/detail/kjokipgpljcoidilmaahgdejibepoakn)
+2. Clique em 'Usar no chrome'
+3. Já está instalado!!
 
-## Distance Learning System Supported
+## Plataformas EAD suportadas
 - [estacio.webaula](https://estacio.webaula.com.br)
 
-## Getting Started
-Click on Extension icon and choose a size.
-Your preference will be saved to be used on future.
+## Como usar
+Clique no icone da extensão e escolha um tamanho que melhor se adapte ao seu monitor.
+Sua preferência será salva.
 
-## Contribute
-1. Fork this repository
-2. Checkout to 'develop' branch
-3. Use the template below to create a solution to fix the content size issue on the distance learning system you use.
-4. Make a commit
-5. Send a pull-request
-6. I will test and merge your changes
+## Como contribuir
+1. Faça um fork nesse repositório
+2. Mude para a branch develop
+3. Use o template abaixo para criar uma soluçao para o sistema EAD que você usa
+4. Faça um commit
+5. Envie um pull-request
+6. Sua proposta será testada, e então, integrada ao projeto
 
-### Use this template
-Use on script [content.js](https://github.com/daviinacio/estacio_flash_size/blob/develop/content.js)
+### Use o template
+Use no script [content.js](https://github.com/daviinacio/estacio_flash_size/blob/develop/content.js)
 
 ```javascript
 
 changer.addCollege({
     name: "college",
     matches: [
-        // String that matches with hostname
-        // Place any string here if there doesn't have iframe
+        // Coloque palavras que apareçam no hostname 
+        // Use essa função, caso a sua plataforma não tenha iframes
     ],
     options: {
-        'Size_Label': {
-            // Dimens
+        'Nome de exibição do tamanho': {
+            // Dimenções
         }
     },
     elements: {
-        // Elements from document
+        // Elementos do documento
     },
-    frame: "",  // Content iframe id
+    frame: "",  // ID do iframe
     frameElements: {
-        // Elements from frame
+        // Elementos do iframe
     },
     change: function(e){
         const { elements, frameElements, size } = e;
@@ -60,6 +59,12 @@ changer.addCollege({
         const { } = size;
 
         // Place element modifications here
+        
+
+        // Dark mode style
+        if(e.isDark){
+            // Place dark mode modifications here
+        }
     }
 });
 
