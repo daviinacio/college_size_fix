@@ -58,12 +58,12 @@ changer.addCollege({
         const { } = frameElements;
         const { } = size;
 
-        // Place element modifications here
-        
+        // Coloque as modificações de elemento aqui
 
-        // Dark mode style
+
+        // Estilo de tema escuro
         if(e.isDark){
-            // Place dark mode modifications here
+            // Coloque as modificações do tema escuro aqui
         }
     }
 });
