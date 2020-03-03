@@ -62,7 +62,7 @@ changer.addCollege({
 
 
         // Estilo de tema escuro
-        if(e.isDark){
+        if(e.darkmode){
             // Coloque as modificações do tema escuro aqui
         }
     }
