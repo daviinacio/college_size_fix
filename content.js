@@ -1,10 +1,97 @@
 const changer = new CollegeFlashSize();
 
-changer.addCollege({
+// Estácio
+changer.addSystem({
     name: "estacio",
-    matches: [
-        "estacio"
-    ],
+    match_url: "estacio" // https://estacio.*
+});
+
+changer.addToggle('estacio', {
+    label: 'Dark Mode',
+    change: function(e){
+        if(e.value){
+            // Dark Mode enabled
+        }
+        else {
+            // Dark Mode disabled
+        }
+        
+        // Notify to content context for theme change
+        e.notifyChange();
+    }
+});
+
+changer.addContext('estacio', {
+    context: "text",
+    message: "Conteúdo em texto",
+    iframe: '#courseIframe',
+    elements: {
+        'conteudo': "#conteudo",
+        'boxGrey': ".mdc-bg-grey-50, .mdc-bg-grey-100",
+        'boxDarkGrey': ".mdc-bg-grey-200, .mdc-bg-grey-600",
+        'boxBlueGrey': ".mdc-bg-blue-grey-100, .mdc-bg-blue-grey-50",
+        'textarea': "textarea"
+    },
+    change: function(e){
+        const { conteudo, boxGrey, boxDarkGrey, boxBlueGrey, textarea } = e.elements;
+        
+        if(e.darkmode){
+            conteudo.style.color = "white";
+            conteudo.classList.add('mdc-bg-grey-900');
+
+            boxGrey.forEach((element) => {
+                element.classList.remove('mdc-bg-grey-50');
+                element.classList.remove('mdc-bg-grey-100');
+                element.classList.add('mdc-bg-grey-900');
+            });
+
+            boxDarkGrey.forEach((element) => {
+                element.classList.remove('mdc-bg-grey-200');
+                element.classList.remove('mdc-bg-grey-600');
+                element.classList.add('mdc-bg-grey-800');
+            });
+
+            boxBlueGrey.forEach((element) => {
+                element.classList.remove('mdc-bg-blue-grey-50');
+                element.classList.remove('mdc-bg-blue-grey-100');
+                element.classList.add('mdc-bg-blue-grey-900');
+            });
+
+            textarea.forEach((element) => {
+               element.classList.add('mdc-bg-grey-900'); 
+               element.style.color = '#ddd';
+            });
+        }
+        else {
+            conteudo.style.color = "inherit";
+            conteudo.classList.remove('mdc-bg-grey-900');
+
+            boxGrey.forEach((element) => {
+                element.classList.remove('mdc-bg-grey-900');
+                element.classList.add('mdc-bg-grey-100');
+            });
+
+            boxDarkGrey.forEach((element) => {
+                element.classList.remove('mdc-bg-grey-800');
+                element.classList.add('mdc-bg-grey-200');
+            });
+
+            boxBlueGrey.forEach((element) => {
+                element.classList.remove('mdc-bg-blue-grey-900');
+                element.classList.remove('mdc-bg-blue-grey-50');
+            });
+
+            textarea.forEach((element) => {
+               element.classList.add('mdc-bg-grey-900'); 
+               element.style.color = 'inherit';
+            });
+        }
+    }
+});
+
+changer.addContext('estacio', {
+    context: "flash1",
+    message: undefined,
     options: {
         'Normal': {
             height: 604,
@@ -15,115 +102,24 @@ changer.addCollege({
             ratio: 1.691
         }
     },
+    iframe: '#courseIframe',
     elements: {
-        '_body': "body",
-        '_buttons': '.singleButton2',
-    },
-    frame: "#courseIframe",
-    frameElements: {
         'flash': "#centro > object",
         'container': "#centro",
         'body': "body",
         'conteudo': "#conteudo"
     },
     change: function(e){
-        const { elements, frameElements, size } = e;
+        const { flash, container } = e.elements;
+        const { width, height } = e.size;
+        
+        flash.style.width = width + 'px';
+        flash.style.height = height + 'px';
+        flash.style.margin = 'auto';
+        container.style.width = 'inherit';
+        container.style.backgroundImage = 'none';
+        container.style.display = 'flex';
 
-        const { _body, _buttons, frame } = elements;
-        const { body, flash, container, conteudo } = frameElements;
-        const { width, height } = size;
-
-        if(flash){
-            flash.style.width = width + 'px';
-            flash.style.height = height + 'px';
-            flash.style.margin = 'auto';
-            container.style.width = 'inherit';
-            container.style.backgroundImage = 'none';
-            container.style.display = 'flex';
-
-            body.style.backgroundImage = 'none';
-        }
-
-        // Dark mode style
-        if(e.darkmode){
-            _body.setAttribute('style', 'background-color: #1d1d1d !important');
-            
-            _buttons.forEach(element => {
-                element.style.backgroundColor = 'inherit';
-                element.style.color = 'white';
-
-                for (let child of element.children) {
-                    if(child.nodeName == 'I'){
-                        child.classList.remove('marginTop3px');
-                        child.classList.add('marginTop6px');
-                    }
-                }
-            });
-        }
-
-        // Text content dark mode
-        if(conteudo && e.darkmode){
-            conteudo.style.color = "white";
-            conteudo.classList.add('mdc-bg-grey-900');
-
-            frame.contentDocument.querySelectorAll('.mdc-bg-grey-50, .mdc-bg-grey-100').forEach((element) => {
-                element.classList.remove('mdc-bg-grey-50');
-                element.classList.remove('mdc-bg-grey-100');
-                element.classList.add('mdc-bg-grey-900');
-            });
-
-            frame.contentDocument.querySelectorAll('.mdc-bg-grey-200, .mdc-bg-grey-600').forEach((element) => {
-                element.classList.remove('mdc-bg-grey-200');
-                element.classList.remove('mdc-bg-grey-600');
-                element.classList.add('mdc-bg-grey-800');
-            });
-
-            frame.contentDocument.querySelectorAll('.mdc-bg-blue-grey-100, .mdc-bg-blue-grey-50').forEach((element) => {
-                element.classList.remove('mdc-bg-blue-grey-50');
-                element.classList.remove('mdc-bg-blue-grey-100');
-                element.classList.add('mdc-bg-blue-grey-900');
-            });
-
-            frame.contentDocument.querySelectorAll('textarea').forEach((element) => {
-               element.classList.add('mdc-bg-grey-900'); 
-               element.style.color = '#ddd';
-            });
-        }
-    }
-});
-
-// Add new college content size fix here :)
-changer.addCollege({
-    name: "college",
-    matches: [
-        // String that matches with hostname
-        // Place any string here if there doesn't have iframe
-    ],
-    options: {
-        'Size_Label': {
-            // Dimens
-        }
-    },
-    elements: {
-        // Elements from document
-    },
-    frame: "",  // Content iframe id
-    frameElements: {
-        // Elements from frame
-    },
-    change: function(e){
-        const { elements, frameElements, size } = e;
-
-        const { } = elements;
-        const { } = frameElements;
-        const { } = size;
-
-        // Place element modifications here
-
-
-        // Dark mode style
-        if(e.isDark){
-            // Place dark mode modifications here
-        }
+        body.style.backgroundImage = 'none';
     }
 });
