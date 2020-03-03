@@ -9,12 +9,22 @@ function CollegeFlashSize(){
             localStorage.setItem('CollegeFlashSize.size', request.choose);
         }
         else
+        if(request.darkmode){
+            localStorage.setItem('CollegeFlashSize.darkmode', request.darkmode.active);
+
+            if(request.darkmode.active)
+                choose();
+            else
+                location.reload();
+        }
+        else
         if(request.options){
             colleges.forEach((college) => {
                 if(college.active){
                     sendResponse({
                         options: Object.keys(college.options),
-                        active: localStorage.getItem('CollegeFlashSize.size')
+                        active: localStorage.getItem('CollegeFlashSize.size'),
+                        darkmode: localStorage.getItem('CollegeFlashSize.darkmode') == 'true'
                     });
                 }
             });
@@ -43,15 +53,17 @@ function CollegeFlashSize(){
         function initialize(){
             college.active = true;
 
-            var currentSize = localStorage.getItem('CollegeFlashSize.size');
+            const darkmode = localStorage.getItem('CollegeFlashSize.darkmode');
 
-            choose(
-                // Preference value
-                currentSize ? currentSize :
+            if(typeof(darkmode) == 'undefined' || darkmode == null)
+                localStorage.setItem('CollegeFlashSize.darkmode', window.matchMedia('(prefers-color-scheme: dark)').matches);
 
-                // First option from college
-                Object.keys(college.options)[0]
-            );
+            const size = localStorage.getItem('CollegeFlashSize.size');
+
+            if(typeof(size) === 'undefined' || size == null)
+                localStorage.setItem('CollegeFlashSize.size', Object.keys(college.options)[0]);
+
+            choose();
         }
     }
 
@@ -59,6 +71,17 @@ function CollegeFlashSize(){
         colleges.forEach((college) => {
             if(college.active){
                 /*               ELEMENTS               */
+
+                // Load if undefined
+                if(typeof(choice) === 'undefined'){
+                    const storage = localStorage.getItem('CollegeFlashSize.size');
+                    const first = Object.keys(college.options)[0];
+                    
+                    if(typeof(storage) === 'undefined' || storage == null)
+                        choice = first;
+                    else
+                        choice = storage;
+                }
 
                 const elements = {};
 
@@ -115,12 +138,12 @@ function CollegeFlashSize(){
 
 
                 // Check for dark mode
-                const isDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+                const darkmode = localStorage.getItem('CollegeFlashSize.darkmode') == 'true';
 
                 // Handle change
                 if(college.change){
                     college.change({
-                        elements, frameElements, size, isDark
+                        elements, frameElements, size, darkmode
                     });
                 }
             }

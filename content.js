@@ -45,7 +45,7 @@ changer.addCollege({
         }
 
         // Dark mode style
-        if(e.isDark){
+        if(e.darkmode){
             _body.setAttribute('style', 'background-color: #1d1d1d !important');
             
             _buttons.forEach(element => {
@@ -62,7 +62,7 @@ changer.addCollege({
         }
 
         // Text content dark mode
-        if(conteudo){
+        if(conteudo && e.darkmode){
             conteudo.style.color = "white";
             conteudo.classList.add('mdc-bg-grey-900');
 
