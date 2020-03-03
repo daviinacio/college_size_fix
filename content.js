@@ -15,6 +15,10 @@ changer.addCollege({
             ratio: 1.691
         }
     },
+    elements: {
+        '_body': "body",
+        '_buttons': '.singleButton2',
+    },
     frame: "#courseIframe",
     frameElements: {
         'flash': "#centro > object",
@@ -22,8 +26,9 @@ changer.addCollege({
         'body': "body"
     },
     change: function(e){
-        const { frameElements, size } = e;
+        const { elements, frameElements, size } = e;
 
+        const { _body, _buttons } = elements;
         const { body, flash, container } = frameElements;
         const { width, height } = size;
 
@@ -36,6 +41,23 @@ changer.addCollege({
         container.style.display = 'flex';
 
         body.style.backgroundImage = 'none';
+
+        // Dark mode style
+        if(e.isDark){
+            _body.setAttribute('style', 'background-color: #1d1d1d !important');
+            
+            _buttons.forEach(element => {
+                element.style.backgroundColor = 'inherit';
+                element.style.color = 'white';
+
+                for (let child of element.children) {
+                    if(child.nodeName == 'I'){
+                        child.classList.remove('marginTop3px');
+                        child.classList.add('marginTop6px');
+                    }
+                }
+            });
+        }
     }
 });
 
@@ -66,5 +88,11 @@ changer.addCollege({
         const { } = size;
 
         // Place element modifications here
+
+
+        // Dark mode style
+        if(e.isDark){
+            // Place dark mode modifications here
+        }
     }
 });

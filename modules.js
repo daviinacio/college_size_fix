@@ -65,7 +65,7 @@ function CollegeFlashSize(){
                 if(college.elements){
                     Object.keys(college.elements).forEach((key) => {
                         const el = document.querySelectorAll(college.elements[key]);
-    
+
                         if(el){
                             elements[key] = el.length > 1 ? el : el[0];
                         }
@@ -113,10 +113,14 @@ function CollegeFlashSize(){
                 else
                     throw "CollegeFlashSize::Error -> invalid option dimentions";
 
+
+                // Check for dark mode
+                const isDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+
                 // Handle change
                 if(college.change){
                     college.change({
-                        elements, frameElements, size
+                        elements, frameElements, size, isDark
                     });
                 }
             }
