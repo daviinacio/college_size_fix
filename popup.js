@@ -17,8 +17,8 @@ document.addEventListener('DOMContentLoaded', function () {
 
     // Prevent contextmenu
     document.addEventListener('contextmenu', function(event) {
-        event.preventDefault();
-     }, true); 
+        //event.preventDefault();
+    }, true);
     
     chrome.tabs.query({
         currentWindow: true,
@@ -27,6 +27,24 @@ document.addEventListener('DOMContentLoaded', function () {
         // Request for size options
         chrome.tabs.sendMessage(tabs[0].id, { options: true }, (res) => {
             if(typeof(res) == 'undefined') return;
+
+            if(res.darkmode){
+                document.body.classList.add('dark');
+                document.querySelector('#darkmode').checked = res.darkmode;
+            }
+
+            document.querySelector('#darkmode').addEventListener('click', (e) => {
+                const checked = e.target.checked;
+
+                if(checked) document.body.classList.add('dark');
+                else        document.body.classList.remove('dark');
+
+                chrome.tabs.sendMessage(tabs[0].id, {
+                    darkmode: {
+                        active: checked
+                    }
+                });
+            });
             
             if(Array.isArray(res.options)){
                 document.querySelector('#error').style.display = 'none';

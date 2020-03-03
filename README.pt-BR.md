@@ -59,6 +59,12 @@ changer.addCollege({
         const { } = size;
 
         // Coloque as modificações de elemento aqui
+
+
+        // Estilo de tema escuro
+        if(e.darkmode){
+            // Coloque as modificações do tema escuro aqui
+        }
     }
 });
 

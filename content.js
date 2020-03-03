@@ -1,128 +1,3 @@
-function CollegeFlashSize(){
-    const colleges = [];
-
-    chrome.runtime.onMessage.addListener((request, sender, sendResponse) => {
-        if(request.choose){
-            choose(request.choose);
-            localStorage.setItem('CollegeFlashSize.size', request.choose);
-        }
-        else
-        if(request.options){
-            colleges.forEach((college) => {
-                if(college.active){
-                    sendResponse({
-                        options: Object.keys(college.options),
-                        active: localStorage.getItem('CollegeFlashSize.size')
-                    });
-                }
-            });
-        }
-    });
-
-    function addCollege(college){
-        colleges.push(college);
-
-        // Initialize on frame load
-        if(college.frame){
-            const frame = document.querySelector(college.frame);
-            if(frame)
-                frame.addEventListener('load', initialize);
-        }
-        // Initialize if the string matches
-        else {
-            for(let i = 0; i < college.matches.length; i++) {
-                if(location.hostname.includes(college.matches[i])){
-                    initialize();
-                    break;
-                }
-            }
-        }
-        
-        function initialize(){
-            college.active = true;
-
-            var currentSize = localStorage.getItem('CollegeFlashSize.size');
-
-            choose(
-                // Preference value
-                currentSize ? currentSize :
-
-                // First option from college
-                Object.keys(college.options)[0]
-            );
-        }
-    }
-
-    function choose(choice){
-        colleges.forEach((college) => {
-            if(college.active){
-                /*               ELEMENTS               */
-
-                const elements = {};
-
-                Object.keys(college.elements).forEach((key) => {
-                    const el = document.querySelectorAll(college.elements[key]);
-
-                    if(el){
-                        elements[key] = el.length > 1 ? el : el[0];
-                    }
-                });
-
-
-                /*            FREME ELEMENTS            */
-                const frameElements = {};
-
-                if(college.frame){
-                    elements.frame = document.querySelector(college.frame);
-
-                    Object.keys(college.frameElements).forEach((key) => {
-                        const el = elements.frame.contentDocument.querySelectorAll(college.frameElements[key]);
-    
-                        if(el){
-                            frameElements[key] = el.length > 1 ? el : el[0];
-                        }
-                    });
-                }
-
-                /*              DIMENTIONS              */
-
-                const size = college.options[choice];
-
-                // Alright, don't need changes
-                if(size.width && size.height){} else
-                // Dimens with ratio
-                if(size.ratio){
-                    if(size.height)
-                        size.width = size.height * size.ratio;
-                    else
-                    if(size.width)
-                        size.height = size.width / size.ratio;
-                } else
-                // Missing info, put equals
-                if(size.width)
-                    size.height = size.width;
-                else
-                if(size.height)
-                    size.width = size.height;
-
-                // Handle change
-                if(college.change){
-                    college.change({
-                        elements, frameElements, size
-                    });
-                }
-            }
-        });
-    }
-
-    return {
-        addCollege,
-        choose
-    };
-};
-
-// College definitions
-
 const changer = new CollegeFlashSize();
 
 changer.addCollege({
@@ -141,29 +16,79 @@ changer.addCollege({
         }
     },
     elements: {
-        
+        '_body': "body",
+        '_buttons': '.singleButton2',
     },
     frame: "#courseIframe",
     frameElements: {
         'flash': "#centro > object",
         'container': "#centro",
-        'body': 'body'
+        'body': "body",
+        'conteudo': "#conteudo"
     },
     change: function(e){
-        const { frameElements, size } = e;
+        const { elements, frameElements, size } = e;
 
-        const { body, flash, container } = frameElements;
+        const { _body, _buttons, frame } = elements;
+        const { body, flash, container, conteudo } = frameElements;
         const { width, height } = size;
 
-        flash.style.width = width+'px';
-        flash.style.height = height+'px';
-        flash.style.margin = 'auto';   
-        
-        container.style.width = 'inherit';
-        container.style.backgroundImage = 'none';
-        container.style.display = 'flex';
-        
-        body.style.backgroundImage = 'none';
+        if(flash){
+            flash.style.width = width + 'px';
+            flash.style.height = height + 'px';
+            flash.style.margin = 'auto';
+            container.style.width = 'inherit';
+            container.style.backgroundImage = 'none';
+            container.style.display = 'flex';
+
+            body.style.backgroundImage = 'none';
+        }
+
+        // Dark mode style
+        if(e.darkmode){
+            _body.setAttribute('style', 'background-color: #1d1d1d !important');
+            
+            _buttons.forEach(element => {
+                element.style.backgroundColor = 'inherit';
+                element.style.color = 'white';
+
+                for (let child of element.children) {
+                    if(child.nodeName == 'I'){
+                        child.classList.remove('marginTop3px');
+                        child.classList.add('marginTop6px');
+                    }
+                }
+            });
+        }
+
+        // Text content dark mode
+        if(conteudo && e.darkmode){
+            conteudo.style.color = "white";
+            conteudo.classList.add('mdc-bg-grey-900');
+
+            frame.contentDocument.querySelectorAll('.mdc-bg-grey-50, .mdc-bg-grey-100').forEach((element) => {
+                element.classList.remove('mdc-bg-grey-50');
+                element.classList.remove('mdc-bg-grey-100');
+                element.classList.add('mdc-bg-grey-900');
+            });
+
+            frame.contentDocument.querySelectorAll('.mdc-bg-grey-200, .mdc-bg-grey-600').forEach((element) => {
+                element.classList.remove('mdc-bg-grey-200');
+                element.classList.remove('mdc-bg-grey-600');
+                element.classList.add('mdc-bg-grey-800');
+            });
+
+            frame.contentDocument.querySelectorAll('.mdc-bg-blue-grey-100, .mdc-bg-blue-grey-50').forEach((element) => {
+                element.classList.remove('mdc-bg-blue-grey-50');
+                element.classList.remove('mdc-bg-blue-grey-100');
+                element.classList.add('mdc-bg-blue-grey-900');
+            });
+
+            frame.contentDocument.querySelectorAll('textarea').forEach((element) => {
+               element.classList.add('mdc-bg-grey-900'); 
+               element.style.color = '#ddd';
+            });
+        }
     }
 });
 
@@ -194,5 +119,11 @@ changer.addCollege({
         const { } = size;
 
         // Place element modifications here
+
+
+        // Dark mode style
+        if(e.isDark){
+            // Place dark mode modifications here
+        }
     }
 });

@@ -60,6 +60,12 @@ changer.addCollege({
         const { } = size;
 
         // Place element modifications here
+        
+
+        // Dark mode style
+        if(e.darkmode){
+            // Place dark mode modifications here
+        }
     }
 });
 
