@@ -3,6 +3,7 @@
 ## [1.3] - 
 ### Added
 - Dark mode support
+- Text content dark mode
 
 ## [1.2] - 26/02/2020
 ### Added

@@ -58,7 +58,13 @@ changer.addCollege({
         const { } = frameElements;
         const { } = size;
 
-        // Coloque as modificações de elemento aqui
+        // Place element modifications here
+        
+
+        // Dark mode style
+        if(e.isDark){
+            // Place dark mode modifications here
+        }
     }
 });
 

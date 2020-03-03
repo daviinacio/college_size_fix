@@ -23,24 +23,26 @@ changer.addCollege({
     frameElements: {
         'flash': "#centro > object",
         'container': "#centro",
-        'body': "body"
+        'body': "body",
+        'conteudo': "#conteudo"
     },
     change: function(e){
         const { elements, frameElements, size } = e;
 
-        const { _body, _buttons } = elements;
-        const { body, flash, container } = frameElements;
+        const { _body, _buttons, frame } = elements;
+        const { body, flash, container, conteudo } = frameElements;
         const { width, height } = size;
 
-        flash.style.width = width + 'px';
-        flash.style.height = height + 'px';
-        flash.style.margin = 'auto';
+        if(flash){
+            flash.style.width = width + 'px';
+            flash.style.height = height + 'px';
+            flash.style.margin = 'auto';
+            container.style.width = 'inherit';
+            container.style.backgroundImage = 'none';
+            container.style.display = 'flex';
 
-        container.style.width = 'inherit';
-        container.style.backgroundImage = 'none';
-        container.style.display = 'flex';
-
-        body.style.backgroundImage = 'none';
+            body.style.backgroundImage = 'none';
+        }
 
         // Dark mode style
         if(e.isDark){
@@ -56,6 +58,30 @@ changer.addCollege({
                         child.classList.add('marginTop6px');
                     }
                 }
+            });
+        }
+
+        // Text content dark mode
+        if(conteudo){
+            conteudo.style.color = "white";
+            conteudo.classList.add('mdc-bg-grey-900');
+
+            frame.contentDocument.querySelectorAll('.mdc-bg-grey-50, .mdc-bg-grey-100').forEach((element) => {
+                element.classList.remove('mdc-bg-grey-50');
+                element.classList.remove('mdc-bg-grey-100');
+                element.classList.add('mdc-bg-grey-900');
+            });
+
+            frame.contentDocument.querySelectorAll('.mdc-bg-grey-200, .mdc-bg-grey-600').forEach((element) => {
+                element.classList.remove('mdc-bg-grey-200');
+                element.classList.remove('mdc-bg-grey-600');
+                element.classList.add('mdc-bg-grey-800');
+            });
+
+            frame.contentDocument.querySelectorAll('.mdc-bg-blue-grey-100, .mdc-bg-blue-grey-50').forEach((element) => {
+                element.classList.remove('mdc-bg-blue-grey-50');
+                element.classList.remove('mdc-bg-blue-grey-100');
+                element.classList.add('mdc-bg-blue-grey-900');
             });
         }
     }
