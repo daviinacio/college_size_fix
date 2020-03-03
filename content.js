@@ -83,6 +83,11 @@ changer.addCollege({
                 element.classList.remove('mdc-bg-blue-grey-100');
                 element.classList.add('mdc-bg-blue-grey-900');
             });
+
+            frame.contentDocument.querySelectorAll('textarea').forEach((element) => {
+               element.classList.add('mdc-bg-grey-900'); 
+               element.style.color = '#ddd';
+            });
         }
     }
 });
