@@ -66,23 +66,38 @@ changer.addCollege({
             conteudo.style.color = "white";
             conteudo.classList.add('mdc-bg-grey-900');
 
-            frame.contentDocument.querySelectorAll('.mdc-bg-grey-50, .mdc-bg-grey-100').forEach((element) => {
-                element.classList.remove('mdc-bg-grey-50');
-                element.classList.remove('mdc-bg-grey-100');
-                element.classList.add('mdc-bg-grey-900');
+
+            const changes = {
+                'mdc-bg-cyan-50': 'mdc-bg-cyan-900',
+                'mdc-bg-cyan-100': 'mdc-bg-cyan-800',
+                'mdc-text-cyan-500': 'mdc-text-cyan-50',
+                'mdc-text-cyan-900': 'mdc-text-cyan-100',
+                'mdc-text-grey-900': 'mdc-text-grey-50',
+                'mdc-bg-teal-50': 'mdc-bg-teal-900',
+                'mdc-bg-teal-100': 'mdc-bg-teal-700',
+                'mdc-text-teal-500': 'mdc-text-teal-50',
+                'mdc-bg-grey-100': 'mdc-bg-grey-900',
+                'mdc-bg-grey-50': 'mdc-bg-grey-900',
+                'mdc-bg-grey-200': 'mdc-bg-grey-800',
+                'mdc-bg-grey-600': 'mdc-bg-grey-800',
+                'mdc-bg-blue-grey-50': 'mdc-bg-blue-grey-900',
+                'mdc-bg-blue-grey-100': 'mdc-bg-blue-grey-900',
+                'mdc-bg-blue-100': 'mdc-bg-blue-900',
+                'bg_leitura_dinamica': ''
+            };
+
+            Object.keys(changes).forEach((key) => {
+                const elements = frame.contentDocument.querySelectorAll('.' + key);
+        
+                elements.forEach((element) => {
+                    element.classList.remove(key);
+                    
+                    if(changes[key])
+                        element.classList.add(changes[key]);
+                });
             });
 
-            frame.contentDocument.querySelectorAll('.mdc-bg-grey-200, .mdc-bg-grey-600').forEach((element) => {
-                element.classList.remove('mdc-bg-grey-200');
-                element.classList.remove('mdc-bg-grey-600');
-                element.classList.add('mdc-bg-grey-800');
-            });
-
-            frame.contentDocument.querySelectorAll('.mdc-bg-blue-grey-100, .mdc-bg-blue-grey-50').forEach((element) => {
-                element.classList.remove('mdc-bg-blue-grey-50');
-                element.classList.remove('mdc-bg-blue-grey-100');
-                element.classList.add('mdc-bg-blue-grey-900');
-            });
+            frame.contentDocument.querySelector('#box-apresentacao-objetivos').style.color = "white";
 
             frame.contentDocument.querySelectorAll('textarea').forEach((element) => {
                element.classList.add('mdc-bg-grey-900'); 

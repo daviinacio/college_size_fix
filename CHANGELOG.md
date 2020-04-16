@@ -1,9 +1,14 @@
 # Change log
 
-## [1.3] - 
+## [1.3.1] - 15/04/2020
+### Changed
+- Fixes on text content with dark mode
+
+## [1.3] - 03/03/2020
 ### Added
 - Dark mode support
 - Text content dark mode
+- Toggle on popup
 
 ## [1.2] - 26/02/2020
 ### Added
